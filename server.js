@@ -9,7 +9,7 @@ const RedisStore = require('connect-redis')(session);
 const routes = require('./routes/routes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'inspectorgadget';
 
 app.set('view engine', 'jade');
@@ -30,9 +30,9 @@ app.use((req, res, next) => {
     console.log(req.session);
     next();
 });
-
+// adding user info to locals for use in jade template
 app.use((req, res, next) => {
-  app.locals.user = req.session.user;
+  res.locals.user = req.session.user;
   next();
 });
 
