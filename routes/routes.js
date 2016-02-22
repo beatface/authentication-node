@@ -10,7 +10,8 @@ router.use(login);
 router.use(register);
 
 router.get('/', (req, res) => {
-    res.render('index');
+    console.log(req.session);
+    res.render('index', {user: req.session.user});
 });
 
 module.exports = router;

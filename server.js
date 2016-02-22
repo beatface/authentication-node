@@ -2,7 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-// const path = require('path');
+const mongoose = require('mongoose');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 
@@ -20,6 +20,7 @@ app.use(session({
     secret: SESSION_SECRET,
     store: new RedisStore()
 }));
+// middleware to register user visits
 app.use((req, res, next) => {
     req.session.count = req.session.count || 0;
     req.session.count++;
@@ -30,8 +31,17 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+  app.locals.user = req.session.user;
+  next();
+});
+
+
 app.use(routes);
 
-app.listen(PORT, () => {
-    console.log(`Listening on port: ${PORT}!`);
+mongoose.connect('mongodb://localhost:27017/nodeauth', (err) => {
+    if (err) throw err;
+    app.listen(PORT, () => {
+        console.log(`Listening on port: ${PORT}!`);
+    });
 });
