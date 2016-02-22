@@ -16,12 +16,12 @@
       "browser": true,
       "mongo": true
     },
-      "extends": "eslint:recommended",
-      "globals": {
-          "res": true,
-          "$http": false,
-          "$scope": true,
-          "app": true
+    "extends": "eslint:recommended",
+    "globals": {
+      "res": true,
+      "$http": false,
+      "$scope": true,
+      "app": true
     },
     "rules": {
       "no-console": 0
@@ -39,6 +39,7 @@
   },
   "homepage": "https://github.com/beatface/authentication-node#readme",
   "dependencies": {
+    "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "jade": "^1.11.0",
     "mongoose": "^4.4.4",

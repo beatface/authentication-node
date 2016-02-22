@@ -1,6 +1,6 @@
 extends index.jade
 block content
-    form(action='/login' method='POST')
+    form(action='/register' method='POST')
         .input-group
             label(for='email') Email: 
             input#email(type='email' name='email' autofocus required)
@@ -8,6 +8,8 @@ block content
             label(for='password') Password: 
             input#password(type='password' name='password' required)
         .input-group
-            input(type='submit' value='Login')
+            label(for='passwordVerify') Verify password: 
+            input#passwordVerify(type='password' name='passwordVerify' required)
+        .input-group
+            input(type='submit' value='Register')
         
-        button: a(href='register') Register
