@@ -1,2 +1,2 @@
 # authentication-node
-Intro to authentication in Node.js.
+Simple intro to authentication in Node.js.
