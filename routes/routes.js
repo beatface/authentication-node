@@ -11,7 +11,7 @@ router.use(register);
 
 router.get('/', (req, res) => {
     console.log(req.session);
-    res.render('index', {user: req.session.user});
+    res.render('index', {user: res.locals.user});
 });
 
 module.exports = router;

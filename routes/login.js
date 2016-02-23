@@ -5,7 +5,7 @@ const router = express.Router();
 const User = require('../lib/user/user.model');
 
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', {message: res.message});
 });
 
 
@@ -20,18 +20,22 @@ router.post('/login', (req, res) => {
                     req.session.user = user;
                     res.redirect('/');
                 } else {
-                    res.message = {
-                        message: 'Email or password incorrect.'
-                    };
+                    // res.message = 'Email or password incorrect.';
                     res.redirect('/login');
                 }
             });
         } else {
-            res.message = {
-                message: 'Email or password incorrect.'
-            };
+            // res.message = 'Email or password incorrect.';
             res.redirect('/login');
         }
+    });
+});
+
+router.delete('/logout', (req, res) => {
+    req.session.destroy(function(err) {
+        if (err) throw err;
+        // cannot access session here
+        res.redirect('/login');
     });
 });
 

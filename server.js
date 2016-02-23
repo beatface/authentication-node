@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
+const methodOverride = require('method-override');
 
 const routes = require('./routes/routes');
 
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 3001;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'inspectorgadget';
 
 app.set('view engine', 'jade');
+app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -32,8 +34,8 @@ app.use((req, res, next) => {
 });
 // adding user info to locals for use in jade template
 app.use((req, res, next) => {
-  res.locals.user = req.session.user;
-  next();
+    res.locals.user = req.session.user || { email: 'Guest' };
+    next();
 });
 
 

@@ -17,8 +17,9 @@ router.post('/register', (req, res) => {
             if (err) throw err;
             // if the user exists
             if (user) {
+                req.session.user = user;
                 // redirect to login page
-                res.redirect('/login');
+                res.redirect('/');
             // if user doesn't exist
             } else {
                 // register, then redirect

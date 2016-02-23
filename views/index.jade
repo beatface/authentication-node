@@ -5,4 +5,14 @@ html(lang='en')
         
     body
         block content
-            h1 Hello, #{user.email}
+
+            if user.email === 'Guest'
+                h1 Hello, #{user.email}
+                form(action='/login' method='GET')
+                    .input-group
+                        input(type='submit' value='Login')
+            else
+                h1 Hello, #{user.email}
+                form(action='/logout?_method=delete' method='POST')
+                    .input-group
+                        input(type='submit' value='Logout')
